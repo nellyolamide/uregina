@@ -1,0 +1,814 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Cybersecurity & Social Engineering Security | University of Regina</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            line-height: 1.6;
+            background: #0a0f1c;
+            color: #ffffff;
+            overflow-x: hidden;
+        }
+
+        /* Animated Background */
+        .cyber-bg {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: linear-gradient(45deg, #0a0f1c, #1a2332, #0f1419);
+            z-index: -2;
+        }
+
+        .matrix-rain {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            overflow: hidden;
+            z-index: -1;
+            opacity: 0.1;
+        }
+
+        .rain-drop {
+            position: absolute;
+            color: #00ff41;
+            font-family: 'Courier New', monospace;
+            font-size: 14px;
+            animation: fall linear infinite;
+        }
+
+        @keyframes fall {
+            to {
+                transform: translateY(100vh);
+            }
+        }
+
+        /* Navigation */
+        nav {
+            position: fixed;
+            top: 0;
+            width: 100%;
+            background: rgba(10, 15, 28, 0.95);
+            backdrop-filter: blur(20px);
+            z-index: 1000;
+            padding: 1rem 0;
+            border-bottom: 1px solid rgba(0, 255, 65, 0.2);
+        }
+
+        .nav-container {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 0 2rem;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+
+        .logo {
+            display: flex;
+            align-items: center;
+            gap: 1rem;
+        }
+
+        .logo-shield {
+            width: 40px;
+            height: 40px;
+            background: linear-gradient(135deg, #00ff41, #00cc33);
+            border-radius: 8px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-weight: bold;
+            color: #000;
+            animation: pulse 2s ease-in-out infinite alternate;
+        }
+
+        @keyframes pulse {
+            from { box-shadow: 0 0 20px rgba(0, 255, 65, 0.5); }
+            to { box-shadow: 0 0 40px rgba(0, 255, 65, 0.8); }
+        }
+
+        .nav-links {
+            display: flex;
+            list-style: none;
+            gap: 2rem;
+        }
+
+        .nav-links a {
+            color: #ffffff;
+            text-decoration: none;
+            transition: all 0.3s ease;
+            position: relative;
+        }
+
+        .nav-links a:hover {
+            color: #00ff41;
+        }
+
+        .nav-links a:after {
+            content: '';
+            position: absolute;
+            bottom: -5px;
+            left: 0;
+            width: 0;
+            height: 2px;
+            background: #00ff41;
+            transition: width 0.3s ease;
+        }
+
+        .nav-links a:hover:after {
+            width: 100%;
+        }
+
+        /* Hero Section */
+        .hero {
+            min-height: 100vh;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            text-align: center;
+            position: relative;
+            background: radial-gradient(ellipse at center, rgba(0, 255, 65, 0.1) 0%, transparent 70%);
+        }
+
+        .hero-content {
+            max-width: 800px;
+            padding: 2rem;
+            position: relative;
+            z-index: 10;
+        }
+
+        .hero h1 {
+            font-size: 4rem;
+            margin-bottom: 1rem;
+            background: linear-gradient(135deg, #ffffff, #00ff41);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+            animation: glow 3s ease-in-out infinite alternate;
+        }
+
+        @keyframes glow {
+            from { filter: drop-shadow(0 0 20px rgba(0, 255, 65, 0.5)); }
+            to { filter: drop-shadow(0 0 40px rgba(0, 255, 65, 0.8)); }
+        }
+
+        .hero h2 {
+            font-size: 1.5rem;
+            color: #cccccc;
+            margin-bottom: 2rem;
+            font-weight: 300;
+        }
+
+        .cta-button {
+            display: inline-block;
+            padding: 1rem 2rem;
+            background: linear-gradient(135deg, #00ff41, #00cc33);
+            color: #000;
+            text-decoration: none;
+            border-radius: 8px;
+            font-weight: bold;
+            transition: all 0.3s ease;
+            box-shadow: 0 10px 30px rgba(0, 255, 65, 0.3);
+        }
+
+        .cta-button:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 20px 40px rgba(0, 255, 65, 0.5);
+        }
+
+        /* Floating particles */
+        .particles {
+            position: absolute;
+            width: 100%;
+            height: 100%;
+            overflow: hidden;
+        }
+
+        .particle {
+            position: absolute;
+            width: 4px;
+            height: 4px;
+            background: #00ff41;
+            border-radius: 50%;
+            animation: float 6s ease-in-out infinite;
+        }
+
+        @keyframes float {
+            0%, 100% { transform: translateY(0px) rotate(0deg); opacity: 1; }
+            50% { transform: translateY(-100px) rotate(180deg); opacity: 0.5; }
+        }
+
+        /* Program Overview */
+        .section {
+            padding: 5rem 0;
+            position: relative;
+        }
+
+        .container {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 0 2rem;
+        }
+
+        .section-title {
+            text-align: center;
+            font-size: 3rem;
+            margin-bottom: 3rem;
+            color: #00ff41;
+        }
+
+        .program-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(350px, 1fr));
+            gap: 2rem;
+            margin-top: 3rem;
+        }
+
+        .program-card {
+            background: rgba(255, 255, 255, 0.05);
+            backdrop-filter: blur(10px);
+            border-radius: 15px;
+            padding: 2rem;
+            border: 1px solid rgba(0, 255, 65, 0.2);
+            transition: all 0.3s ease;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .program-card:hover {
+            transform: translateY(-10px);
+            box-shadow: 0 20px 40px rgba(0, 255, 65, 0.2);
+            border-color: rgba(0, 255, 65, 0.5);
+        }
+
+        .program-card::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: -100%;
+            width: 100%;
+            height: 100%;
+            background: linear-gradient(90deg, transparent, rgba(0, 255, 65, 0.1), transparent);
+            transition: left 0.5s ease;
+        }
+
+        .program-card:hover::before {
+            left: 100%;
+        }
+
+        .card-icon {
+            font-size: 3rem;
+            color: #00ff41;
+            margin-bottom: 1rem;
+        }
+
+        .card-title {
+            font-size: 1.5rem;
+            margin-bottom: 1rem;
+            color: #ffffff;
+        }
+
+        .card-description {
+            color: #cccccc;
+            line-height: 1.8;
+        }
+
+        /* Research Areas */
+        .research-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+            gap: 1.5rem;
+            margin-top: 2rem;
+        }
+
+        .research-item {
+            background: linear-gradient(135deg, rgba(0, 255, 65, 0.1), rgba(0, 204, 51, 0.1));
+            padding: 1.5rem;
+            border-radius: 10px;
+            border-left: 4px solid #00ff41;
+            transition: all 0.3s ease;
+        }
+
+        .research-item:hover {
+            background: linear-gradient(135deg, rgba(0, 255, 65, 0.2), rgba(0, 204, 51, 0.2));
+            transform: translateX(10px);
+        }
+
+        /* Interactive Demo */
+        .demo-container {
+            background: rgba(0, 0, 0, 0.3);
+            border-radius: 15px;
+            padding: 2rem;
+            margin: 3rem 0;
+            border: 1px solid rgba(0, 255, 65, 0.3);
+        }
+
+        .demo-title {
+            color: #00ff41;
+            font-size: 1.5rem;
+            margin-bottom: 1rem;
+            text-align: center;
+        }
+
+        .security-meter {
+            width: 100%;
+            height: 20px;
+            background: rgba(255, 255, 255, 0.1);
+            border-radius: 10px;
+            overflow: hidden;
+            margin: 1rem 0;
+        }
+
+        .security-level {
+            height: 100%;
+            background: linear-gradient(90deg, #ff4444, #ffaa00, #00ff41);
+            width: 0%;
+            border-radius: 10px;
+            transition: width 2s ease;
+        }
+
+        .demo-buttons {
+            display: flex;
+            gap: 1rem;
+            justify-content: center;
+            flex-wrap: wrap;
+            margin-top: 1rem;
+        }
+
+        .demo-btn {
+            padding: 0.5rem 1rem;
+            background: rgba(0, 255, 65, 0.2);
+            border: 1px solid #00ff41;
+            color: #ffffff;
+            border-radius: 5px;
+            cursor: pointer;
+            transition: all 0.3s ease;
+        }
+
+        .demo-btn:hover {
+            background: rgba(0, 255, 65, 0.3);
+            transform: scale(1.05);
+        }
+
+        /* Faculty Section */
+        .faculty-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+            gap: 2rem;
+            margin-top: 2rem;
+        }
+
+        .faculty-card {
+            text-align: center;
+            background: rgba(255, 255, 255, 0.03);
+            padding: 2rem;
+            border-radius: 15px;
+            transition: all 0.3s ease;
+        }
+
+        .faculty-card:hover {
+            background: rgba(255, 255, 255, 0.08);
+            transform: translateY(-5px);
+        }
+
+        .faculty-avatar {
+            width: 100px;
+            height: 100px;
+            border-radius: 50%;
+            background: linear-gradient(135deg, #00ff41, #00cc33);
+            margin: 0 auto 1rem;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 2rem;
+            color: #000;
+            font-weight: bold;
+        }
+
+        /* Stats Counter */
+        .stats-container {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+            gap: 2rem;
+            margin: 3rem 0;
+        }
+
+        .stat-item {
+            text-align: center;
+            padding: 2rem;
+            background: rgba(0, 255, 65, 0.1);
+            border-radius: 10px;
+            border: 1px solid rgba(0, 255, 65, 0.3);
+        }
+
+        .stat-number {
+            font-size: 3rem;
+            font-weight: bold;
+            color: #00ff41;
+            display: block;
+        }
+
+        .stat-label {
+            color: #cccccc;
+            font-size: 0.9rem;
+            margin-top: 0.5rem;
+        }
+
+        /* Footer */
+        footer {
+            background: rgba(0, 0, 0, 0.5);
+            padding: 3rem 0;
+            border-top: 1px solid rgba(0, 255, 65, 0.2);
+            margin-top: 5rem;
+        }
+
+        .footer-content {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+            gap: 2rem;
+        }
+
+        .footer-section h3 {
+            color: #00ff41;
+            margin-bottom: 1rem;
+        }
+
+        .footer-section p, .footer-section a {
+            color: #cccccc;
+            text-decoration: none;
+            line-height: 1.8;
+        }
+
+        .footer-section a:hover {
+            color: #00ff41;
+        }
+
+        /* Responsive Design */
+        @media (max-width: 768px) {
+            .hero h1 {
+                font-size: 2.5rem;
+            }
+            
+            .nav-links {
+                display: none;
+            }
+            
+            .program-grid {
+                grid-template-columns: 1fr;
+            }
+            
+            .demo-buttons {
+                flex-direction: column;
+                align-items: center;
+            }
+        }
+
+        /* Accessibility */
+        .sr-only {
+            position: absolute;
+            width: 1px;
+            height: 1px;
+            padding: 0;
+            margin: -1px;
+            overflow: hidden;
+            clip: rect(0, 0, 0, 0);
+            white-space: nowrap;
+            border: 0;
+        }
+
+        /* Custom scrollbar */
+        ::-webkit-scrollbar {
+            width: 8px;
+        }
+
+        ::-webkit-scrollbar-track {
+            background: #0a0f1c;
+        }
+
+        ::-webkit-scrollbar-thumb {
+            background: #00ff41;
+            border-radius: 4px;
+        }
+
+        ::-webkit-scrollbar-thumb:hover {
+            background: #00cc33;
+        }
+    </style>
+</head>
+<body>
+    <div class="cyber-bg"></div>
+    <div class="matrix-rain" id="matrixRain"></div>
+
+    <nav>
+        <div class="nav-container">
+            <div class="logo">
+                <div class="logo-shield">🛡️</div>
+                <div>
+                    <div style="font-size: 1.2rem; font-weight: bold;">U of R CyberSec</div>
+                    <div style="font-size: 0.8rem; color: #00ff41;">University of Regina</div>
+                </div>
+            </div>
+            <ul class="nav-links">
+                <li><a href="#programs">Programs</a></li>
+                <li><a href="#research">Research</a></li>
+                <li><a href="#faculty">Faculty</a></li>
+                <li><a href="#demo">Live Demo</a></li>
+                <li><a href="#contact">Apply</a></li>
+            </ul>
+        </div>
+    </nav>
+
+    <section class="hero">
+        <div class="particles" id="particles"></div>
+        <div class="hero-content">
+            <h1>CyberSecurity & Social Engineering Defense</h1>
+            <h2>Master of Engineering Program | University of Regina</h2>
+            <p style="font-size: 1.1rem; margin: 2rem 0; color: #cccccc;">
+                Pioneering the future of cybersecurity through advanced research, hands-on learning, 
+                and cutting-edge defense against social engineering attacks.
+            </p>
+            <a href="#programs" class="cta-button">Explore Our Programs</a>
+        </div>
+    </section>
+
+    <section class="section" id="programs">
+        <div class="container">
+            <h2 class="section-title">Program Offerings</h2>
+            <div class="program-grid">
+                <div class="program-card">
+                    <div class="card-icon">🎓</div>
+                    <h3 class="card-title">MEng in Cybersecurity</h3>
+                    <p class="card-description">
+                        A comprehensive 2-year program focusing on advanced cybersecurity principles, 
+                        threat analysis, and defense system design. Includes coursework in cryptography, 
+                        network security, and incident response.
+                    </p>
+                </div>
+                <div class="program-card">
+                    <div class="card-icon">🧠</div>
+                    <h3 class="card-title">Social Engineering Defense</h3>
+                    <p class="card-description">
+                        Specialized track covering psychological manipulation techniques, human factors 
+                        in security, and developing organizational resilience against social engineering attacks.
+                    </p>
+                </div>
+                <div class="program-card">
+                    <div class="card-icon">🔬</div>
+                    <h3 class="card-title">Research Concentration</h3>
+                    <p class="card-description">
+                        Thesis-based program with opportunities to contribute to cutting-edge research 
+                        in AI-powered security, quantum cryptography, and behavioral security analytics.
+                    </p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <section class="section" id="research">
+        <div class="container">
+            <h2 class="section-title">Research Excellence</h2>
+            <div class="stats-container">
+                <div class="stat-item">
+                    <span class="stat-number">15</span>
+                    <div class="stat-label">Active Research Projects</div>
+                </div>
+                <div class="stat-item">
+                    <span class="stat-number">$2.3M</span>
+                    <div class="stat-label">Research Funding</div>
+                </div>
+                <div class="stat-item">
+                    <span class="stat-number">85%</span>
+                    <div class="stat-label">Graduate Employment Rate</div>
+                </div>
+                <div class="stat-item">
+                    <span class="stat-number">12</span>
+                    <div class="stat-label">Industry Partnerships</div>
+                </div>
+            </div>
+            
+            <div class="research-grid">
+                <div class="research-item">
+                    <h4>AI-Powered Threat Detection</h4>
+                    <p>Machine learning algorithms for real-time cyberthreat identification and response.</p>
+                </div>
+                <div class="research-item">
+                    <h4>Behavioral Security Analytics</h4>
+                    <p>Understanding human behavior patterns to prevent social engineering attacks.</p>
+                </div>
+                <div class="research-item">
+                    <h4>Quantum Cryptography</h4>
+                    <p>Next-generation encryption methods using quantum mechanical principles.</p>
+                </div>
+                <div class="research-item">
+                    <h4>IoT Security</h4>
+                    <p>Securing the rapidly expanding Internet of Things ecosystem.</p>
+                </div>
+                <div class="research-item">
+                    <h4>Indigenous Perspectives on Security</h4>
+                    <p>Incorporating traditional knowledge systems into modern cybersecurity frameworks.</p>
+                </div>
+                <div class="research-item">
+                    <h4>Critical Infrastructure Protection</h4>
+                    <p>Safeguarding essential services and systems from cyber threats.</p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <section class="section" id="demo">
+        <div class="container">
+            <h2 class="section-title">Interactive Security Demo</h2>
+            <div class="demo-container">
+                <div class="demo-title">Social Engineering Vulnerability Assessment</div>
+                <p style="text-align: center; margin-bottom: 1rem; color: #cccccc;">
+                    Test your organization's security posture against common social engineering tactics
+                </p>
+                
+                <div class="security-meter">
+                    <div class="security-level" id="securityLevel"></div>
+                </div>
+                <div id="securityText" style="text-align: center; color: #00ff41; margin: 0.5rem 0;">
+                    Security Level: Initializing...
+                </div>
+                
+                <div class="demo-buttons">
+                    <button class="demo-btn" onclick="runPhishingTest()">Phishing Test</button>
+                    <button class="demo-btn" onclick="runSocialEngTest()">Social Engineering Simulation</button>
+                    <button class="demo-btn" onclick="runPasswordTest()">Password Analysis</button>
+                    <button class="demo-btn" onclick="runNetworkScan()">Network Vulnerability Scan</button>
+                </div>
+                
+                <div id="demoResults" style="margin-top: 1rem; padding: 1rem; background: rgba(0,0,0,0.3); border-radius: 8px; min-height: 60px;">
+                    <p style="color: #cccccc; text-align: center;">Click a test above to begin security assessment</p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <section class="section" id="faculty">
+        <div class="container">
+            <h2 class="section-title">Distinguished Faculty</h2>
+            <div class="faculty-grid">
+                <div class="faculty-card">
+                    <div class="faculty-avatar">AS</div>
+                    <h4>Dr. Alexandra Sterling</h4>
+                    <p style="color: #00ff41; margin: 0.5rem 0;">Program Director</p>
+                    <p>15+ years in cybersecurity research, former NSA consultant, specializing in social engineering defense</p>
+                </div>
+                <div class="faculty-card">
+                    <div class="faculty-avatar">MR</div>
+                    <h4>Dr. Marcus Rodriguez</h4>
+                    <p style="color: #00ff41; margin: 0.5rem 0;">Research Chair</p>
+                    <p>Quantum cryptography expert, published 45+ papers, leading research in post-quantum security</p>
+                </div>
+                <div class="faculty-card">
+                    <div class="faculty-avatar">SK</div>
+                    <h4>Dr. Sarah Kootenay</h4>
+                    <p style="color: #00ff41; margin: 0.5rem 0;">Indigenous Security Studies</p>
+                    <p>Bridging traditional knowledge and modern cybersecurity, community-based security research</p>
+                </div>
+                <div class="faculty-card">
+                    <div class="faculty-avatar">JC</div>
+                    <h4>Dr. James Chen</h4>
+                    <p style="color: #00ff41; margin: 0.5rem 0;">AI Security Specialist</p>
+                    <p>Machine learning applications in threat detection, author of "AI-Powered Cybersecurity"</p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <footer>
+        <div class="container">
+            <div class="footer-content">
+                <div class="footer-section">
+                    <h3>Program Information</h3>
+                    <p>University of Regina<br>
+                    Faculty of Engineering & Applied Science<br>
+                    3737 Wascana Parkway<br>
+                    Regina, SK S4S 0A2</p>
+                </div>
+                <div class="footer-section">
+                    <h3>Admissions</h3>
+                    <p><a href="mailto:cybersec@uregina.ca">cybersec@uregina.ca</a><br>
+                    Phone: (306) 585-CYBER<br>
+                    <a href="#">Apply Online</a><br>
+                    <a href="#">Program Requirements</a></p>
+                </div>
+                <div class="footer-section">
+                    <h3>Research Opportunities</h3>
+                    <p><a href="#">Current Projects</a><br>
+                    <a href="#">Industry Partnerships</a><br>
+                    <a href="#">Publication Database</a><br>
+                    <a href="#">Conference Presentations</a></p>
+                </div>
+                <div class="footer-section">
+                    <h3>Connect With Us</h3>
+                    <p>Follow our research and student achievements<br><br>
+                    <a href="#">LinkedIn</a> | <a href="#">Twitter</a> | <a href="#">ResearchGate</a></p>
+                </div>
+            </div>
+        </div>
+    </footer>
+
+    <script>
+        // Matrix Rain Effect
+        function createMatrixRain() {
+            const container = document.getElementById('matrixRain');
+            const chars = '01アイウエオカキクケコサシスセソタチツテトナニヌネノハヒフヘホマミムメモヤユヨラリルレロワヲン';
+            
+            for (let i = 0; i < 50; i++) {
+                const drop = document.createElement('div');
+                drop.className = 'rain-drop';
+                drop.textContent = chars.charAt(Math.floor(Math.random() * chars.length));
+                drop.style.left = Math.random() * 100 + '%';
+                drop.style.animationDuration = (Math.random() * 3 + 2) + 's';
+                drop.style.animationDelay = Math.random() * 2 + 's';
+                container.appendChild(drop);
+            }
+        }
+
+        // Floating Particles
+        function createParticles() {
+            const container = document.getElementById('particles');
+            for (let i = 0; i < 30; i++) {
+                const particle = document.createElement('div');
+                particle.className = 'particle';
+                particle.style.left = Math.random() * 100 + '%';
+                particle.style.top = Math.random() * 100 + '%';
+                particle.style.animationDelay = Math.random() * 6 + 's';
+                particle.style.animationDuration = (Math.random() * 4 + 4) + 's';
+                container.appendChild(particle);
+            }
+        }
+
+        // Counter Animation
+        function animateCounters() {
+            const counters = document.querySelectorAll('.stat-number');
+            const observer = new IntersectionObserver((entries) => {
+                entries.forEach(entry => {
+                    if (entry.isIntersecting) {
+                        const counter = entry.target;
+                        const target = parseInt(counter.textContent.replace(/[^0-9]/g, ''));
+                        let current = 0;
+                        const increment = target / 100;
+                        const timer = setInterval(() => {
+                            current += increment;
+                            if (current >= target) {
+                                counter.textContent = counter.textContent.replace(/[0-9.]+/, target);
+                                clearInterval(timer);
+                            } else {
+                                counter.textContent = counter.textContent.replace(/[0-9.]+/, Math.floor(current));
+                            }
+                        }, 20);
+                    }
+                });
+            });
+
+            counters.forEach(counter => observer.observe(counter));
+        }
+
+        // Demo Functions
+        function runPhishingTest() {
+            updateSecurityDemo("Phishing Test", 
+                "🎣 Scanning for phishing vulnerabilities...<br>" +
+                "✅ Email filter effectiveness: 87%<br>" +
+                "⚠️ User awareness score: 62%<br>" +
+                "📊 Recommendation: Implement advanced user training", 
+                75);
+        }
+
+        function runSocialEngTest() {
+            updateSecurityDemo("Social Engineering Assessment",
+                "🧠 Analyzing social engineering vulnerabilities...<br>" +
+                "✅ Employee security awareness: 78%<br>" +
+                "⚠️ Information disclosure risk: Medium<br>" +
+                "📊 Recommendation: Regular security briefings needed",
+                65);
+        }
+
+        function runPasswordTest() {
+            updateSecurityDemo("Password Security Analysis",
+                "🔐 Evaluating password policies...<br>" +
+                "✅ Strong password compliance: 91%<br>" +
+                "✅ Multi-factor authentication: Enabled<br>" +
+                "📊 Security Level: Excellent",
+                90);
+        }
+
+        function runNetworkScan() {
+            updateSecurityDemo("Network Vulnerability Scan",
+                "🌐 Scanning network infrastructure...<br>" +
+                "✅ Firewall
